@@ -42,7 +42,7 @@
 *load /shapename*
 - load shapes to memory from config.py
 - shapes can be found in config.py
-![load](im/截屏2022-07-10%2017.54.01.png)
+![load](im/截屏2022-07-10%2018.30.39.png)
 
 ## draw
 *draw /shapename /m /n*
