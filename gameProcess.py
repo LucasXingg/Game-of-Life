@@ -2,14 +2,20 @@ from turtle import shape
 import matrixOperation as mO
 
 # iteration by regular life game rule
-def regularUpdate(matrix):
+def regularUpdate(matrix, bound):
     if_rec, len, wid = mO.checkRec(matrix)
     if if_rec == True:
         matrix_it = []
         for i in matrix:
             matrix_it.append(i.copy())
-        for n in range(1, wid - 1):
-            for m in range(1, len - 1):
+        if bound == True:
+            i = 1
+            wid = wid - 1
+            len = len - 1
+        else:
+            i = 0
+        for n in range(i, wid):
+            for m in range(i, len):
                 matrix_it[m][n] = iteration(matrix, m, n)
     else:
         return 0
@@ -23,7 +29,13 @@ def iteration(matrix, m, n):
     self = matrix[m][n]
     for i in -1, 0, 1:
         for j in -1, 0, 1:
-            if matrix[m + i][n + j] == 1:
+            m_it = m + i
+            n_it = n + j
+            if m_it == len(matrix):
+                m_it = 0
+            if n_it == len(matrix[0]):
+                n_it = 0
+            if matrix[m_it][n_it] == 1:
                 count = count + 1
             else:
                 pass

@@ -16,7 +16,8 @@ command_list = [
     "resize",
     "load",
     "clear",
-    "draw"
+    "draw",
+    "wall"
 ]
 #============================
 # dictionary to store shapes

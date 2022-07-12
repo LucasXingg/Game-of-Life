@@ -24,6 +24,7 @@ class myVariables(object):
         self.mat = mO.combinMat(mymat, gP.readShape(config.shape_list['logo']), 11, 19)
         self.shape_list = {}
         self.shape = ''
+        self.bound = False
 
         self.cmd_line = shapes.Line(0, 30, window.get_size()[0], 30)
         self.label = pyglet.text.Label(text = self.input, x = 10, y = 10)
@@ -52,7 +53,7 @@ def rand(dt):
     my.mat = mO.matrixCreate(my.m, my.n, rand = True)
 
 def iterations(dt):
-    my.mat = gP.regularUpdate(my.mat)
+    my.mat = gP.regularUpdate(my.mat, my.bound)
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++(operations)+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -79,6 +80,8 @@ def processCommand(text):
         matInit(para)
     elif name == cL[9]:
         putShape(para)
+    elif name == cL[10]:
+        setWall(para)
     else:
         my.err = 'Command not found'
         
@@ -161,6 +164,36 @@ def putShape(para):
         my.mat = mO.combinMat(my.mat, my_shape, my_m, my_n)
     except:
         my.err = 'Can\'t draw'
+
+def setWall(para):
+    para.append("1")
+    if para[0] == "1":
+        one_vector = []
+        for i in range(my.n):
+            one_vector.append(1)
+        for i in my.mat:
+            i[0] = 1
+            i[-1] = 1
+        my.mat[0] = one_vector
+        my.mat[-1] = one_vector
+        my.bound = True
+    elif para[0] == "0":
+        zero_vector = []
+        for i in range(my.n):
+            zero_vector.append(0)
+        for i in my.mat:
+            i[0] = 0
+            i[-1] = 0
+        my.mat[0] = zero_vector
+        my.mat[-1] = zero_vector
+        my.bound = True
+    elif para[0] == 'set':
+        my.bound = True
+        my.err = "wall set"
+    elif para[0] == 'clear':
+        my.bound = False
+        my.err = "wall clear"
+
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++(init values)++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

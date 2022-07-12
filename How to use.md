@@ -7,6 +7,7 @@
 - resize
 - load
 - draw
+- wall
 - exit
 
 ## run
@@ -50,6 +51,13 @@
 - m n: coordinates same as matrix
 - m = 1, n = 1 if no parameter input
 ![draw](im/截屏2022-07-10%2017.56.13.png)
+
+## wall
+*wall /para*
+- para: /0 /1 /set /clear
+- for 0 and 1, you can set the edge of workspace as cell or dead cell
+- wall /set: set a "wall" in your workspace, so edge of workspace will not participate in iteration
+- wall /clear: clear the wall
 
 ## exit
 *exit*
